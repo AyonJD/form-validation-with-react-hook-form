@@ -24,7 +24,13 @@ const FormField = () => {
                 <h2 className='mb-4 text-center'>Please Register to Continue</h2>
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control className={`rmv-shadow ${errors?.name && "invalid"}`} type="text" placeholder="Full Name" {...register("name", { required: 'Name is Required', minLength: { value: 4, message: 'Minimum 4 character required' } })}
+                    <Form.Control className={`rmv-shadow ${errors?.name && "invalid"}`} type="text" placeholder="Full Name"
+                        {...register("name", {
+                            required: 'Name is Required',
+                            minLength: {
+                                value: 4, message: 'Minimum 4 character required'
+                            }
+                        })}
                         // register function er fitor condition r message gula object akare likhte hoy
                         onKeyUp={() => {
                             trigger('name')
@@ -35,7 +41,20 @@ const FormField = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Control className={`rmv-shadow ${errors?.name && "invalid"}`} type="email" placeholder="Enter email"
+                        {...register("email", {
+                            required: 'Email is required',
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: "Please enter a valid Email"
+                            }
+                        })}
+                        //Regex use korte hole pattern likhe object create korte hobe
+                        onKeyUp={() => {
+                            trigger('email')
+                        }}
+                    />
+                    <small className='text-danger d-block'>{errors?.email?.message}</small>
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                     </Form.Text>
