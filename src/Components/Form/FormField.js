@@ -79,7 +79,19 @@ const FormField = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicPhone">
                     <Form.Label>Phone</Form.Label>
-                    <Form.Control type="text" placeholder="Phone Number" />
+                    <Form.Control className={`rmv-shadow ${errors?.phone && "invalid"}`} type="text" placeholder="Phone Number"
+                        {...register('phone', {
+                            required: 'Phone number is required',
+                            pattern: {
+                                value: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
+                                message: "Please provide a valid contact number"
+                            }
+                        })}
+                        onKeyUp={() => {
+                            trigger('phone')
+                        }}
+                    />
+                    <small className='text-danger d-block'>{errors?.phone?.message}</small>
                 </Form.Group>
 
                 <Button className='w-25' variant="dark" type="submit">
