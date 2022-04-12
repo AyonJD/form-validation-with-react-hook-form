@@ -1,0 +1,9 @@
+.invalid{
+    border: 1px solid red !important;
+}
+.rmv-shadow{
+    box-shadow: none !important;
+}
+.rmv-shadow:focus{
+    box-shadow: none !important;
+}
