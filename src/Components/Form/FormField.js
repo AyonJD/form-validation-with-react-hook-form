@@ -41,7 +41,7 @@ const FormField = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control className={`rmv-shadow ${errors?.name && "invalid"}`} type="email" placeholder="Enter email"
+                    <Form.Control className={`rmv-shadow ${errors?.email && "invalid"}`} type="email" placeholder="Enter email"
                         {...register("email", {
                             required: 'Email is required',
                             pattern: {
@@ -62,7 +62,19 @@ const FormField = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control className={`rmv-shadow ${errors?.password && "invalid"}`} type="password" placeholder="Password"
+                        {...register('password', {
+                            required: 'Password is required',
+                            pattern: {
+                                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                                message: "Minimum eight characters, at least one letter and one number"
+                            }
+                        })}
+                        onKeyUp={() => {
+                            trigger('password')
+                        }}
+                    />
+                    <small className='text-danger d-block'>{errors?.password?.message}</small>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPhone">
